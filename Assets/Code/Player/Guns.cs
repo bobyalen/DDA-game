@@ -15,7 +15,8 @@ public class Guns : MonoBehaviour
     bool shooting;
     bool canShoot = true;
     bool reloading;
-
+    [SerializeField]
+    PlayerModel playerModel;
     public Camera cam;
     public Transform shotDirection;
     [SerializeField] Animator animation;
@@ -86,6 +87,7 @@ public class Guns : MonoBehaviour
     {
         RaycastHit hit;
         canShoot = false;
+        bool shotHit = false;
         animation.SetTrigger("Shot");
         Debug.Log("Shooting");
         ammo--;
@@ -95,16 +97,19 @@ public class Guns : MonoBehaviour
             Debug.Log(name);
             if(hit.collider.CompareTag("Enemy"))
             {
+                shotHit = true;
                 Debug.Log("Here");
                 hit.collider.GetComponent<DamageHandler>().Damage(damage);
                 float health = hit.collider.GetComponent<DamageHandler>().getHealth();
-                hit.collider.GetComponent<test>().hit();
+                Debug.Log(health);
+                hit.collider.GetComponent<Bear>().hit();
                 if (health <= 0)
                 {
-                    hit.collider.GetComponent<test>().die();
+                    hit.collider.GetComponent<Bear>().die();
                 }
             }
         }
+       playerModel.updateShots(shotHit);
         Invoke("ResetShot", shotDelay);
     }
 
@@ -118,15 +123,15 @@ public class Guns : MonoBehaviour
         canShoot = false;
         reloading = true;
         animation.SetTrigger("Reload");
-        resetReload();
+        //resetReload();
     }
 
-    private void resetReload()
+    public void resetReload()
     {
         ammo= magazineSize;
         reloading = false;
         canShoot= true;
-        animation.SetTrigger("Reload");
+        //animation.SetTrigger("Reload");
     }
 
     // Update is called once per frame

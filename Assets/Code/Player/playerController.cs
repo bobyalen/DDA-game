@@ -26,7 +26,8 @@ public class playerController : MonoBehaviour
     {
         healthText.text = "HP: " + health.ToString();
         scoreText.text = "Score" + score.ToString();
-        timerText.text = remaingTime.ToString();
+        int time = (int)remaingTime;
+        timerText.text = time.ToString();
         if (showTimer)
         {
             if (remaingTime > 0)
@@ -60,7 +61,7 @@ public class playerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-
+        this.GetComponent<PlayerModel>().updateHits();
         if (health <= 0)
         {
             Invoke("Destroy", 2.8f);

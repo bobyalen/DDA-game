@@ -10,13 +10,19 @@ public class DamageHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //health = maxHealth;
+    }
 
-        health = maxHealth;
+    public void setHealth(int newHealth)
+    {
+        Debug.Log(newHealth);
+        maxHealth = newHealth;
+        health = newHealth;
     }
 
     public void Damage(float damage)
     {
-        Debug.Log("Getting Hit"+ damage);
+        //Debug.Log("Getting Hit"+ damage);
         health-=damage;
     }
 
