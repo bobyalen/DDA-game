@@ -78,10 +78,6 @@ public class Guns : MonoBehaviour
         {
             Reload();
         }
-        if (ammo==0 && !shooting)
-        {
-            Reload();
-        }
     }
     void Shoot()
     {
@@ -110,15 +106,15 @@ public class Guns : MonoBehaviour
             }
         }
        playerModel.updateShots(shotHit);
-        Invoke("ResetShot", shotDelay);
+        //Invoke("ResetShot", shotDelay);
     }
 
-    private void ResetShot()
+    public void ResetShot()
     {
         canShoot=true;
     }
 
-    private void Reload()
+    public void Reload()
     {
         canShoot = false;
         reloading = true;
@@ -132,6 +128,11 @@ public class Guns : MonoBehaviour
         reloading = false;
         canShoot= true;
         //animation.SetTrigger("Reload");
+    }
+
+    public int ammoCount()
+    {
+        return ammo;
     }
 
     // Update is called once per frame

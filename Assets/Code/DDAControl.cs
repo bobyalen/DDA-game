@@ -145,11 +145,4 @@ public class DDAControl : MonoBehaviour
 
 
 
-        void setHealth(float baseHP)
-    {
-        float health = baseHP;
-    }
-
-
-
 }

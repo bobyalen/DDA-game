@@ -12,9 +12,15 @@ public class GunReload : MonoBehaviour
         guns.resetReload();
     }
 
-    // Update is called once per frame
-    void Update()
+    void resetShot()
     {
-        
+        guns.ResetShot();
+    }
+    void Reload()
+    {
+        if (guns.ammoCount() <= 0)
+        {
+            guns.Reload();
+        }
     }
 }
