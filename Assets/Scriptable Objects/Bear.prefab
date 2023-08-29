@@ -2139,6 +2139,7 @@ MonoBehaviour:
   agroRange: 15
   attackRange: 2
   dead: 0
+  dmg: 10
 --- !u!195 &2403931021823021325
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2149,7 +2150,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.22
-  m_Speed: 3.183868
+  m_Speed: 12
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2173,9 +2174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c03db200315824eb54e5d3d6e54bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 15
   HPBar: {fileID: 4813033063048749832}
-  health: 5
+  health: 15
 --- !u!1 &5786585185046331414
 GameObject:
   m_ObjectHideFlags: 0
