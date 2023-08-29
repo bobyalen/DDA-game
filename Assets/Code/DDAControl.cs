@@ -80,13 +80,15 @@ public class DDAControl : MonoBehaviour
 
     float calculateScore()
     {
-        float avgScore = 0;
-        float score = 0;
-        avgScore += player.CalculateAccuracy();//killTime();
+        float avgScore = ((float)killTime()*0.45f) + ((float)player.CalculateAccuracy()*0.25f) + ((float)player.avgHits()*0.35f);
+
+        Debug.Log("AVG Hits: " + (player.avgHits() * 0.35f));
+        Debug.Log("Kill between kills: " + killTime() * 0.45f);
+        Debug.Log("final Accuracy: " + (player.CalculateAccuracy()));
         return avgScore;
     }
 
-    int killTime()
+    float killTime()
     {
         //time to kill
         float worstTTK = 15.0f;
@@ -100,6 +102,7 @@ public class DDAControl : MonoBehaviour
     public void setDiff()
     {
         float playerScore = calculateScore();
+        Debug.Log("Performance Score: " + playerScore);
         if (playerScore <= 0.3f)
         {
             currentDifficulty = difficulty.Beginner;
@@ -112,7 +115,7 @@ public class DDAControl : MonoBehaviour
         {
             currentDifficulty = difficulty.Normal;
         }
-        if (playerScore <= 0.7f)
+        if (playerScore <= 0.75f)
         {
             currentDifficulty = difficulty.Hard;
         }
@@ -120,7 +123,7 @@ public class DDAControl : MonoBehaviour
         {
             currentDifficulty = difficulty.Master;
         }
-
+        currentStats = enemyDiff();
     }
 
 

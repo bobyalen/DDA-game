@@ -20,6 +20,7 @@ public class Bear : MonoBehaviour
     [SerializeField] float agroRange, attackRange;
     bool chaseRange, attacking, attackReset;
     public bool dead = false;
+    public float dmg;
 
 
 
@@ -153,8 +154,15 @@ public class Bear : MonoBehaviour
         Destroy(gameObject);
     }
 
+    #region setStats
     public void setSpeed(float speed)
     {
         this.GetComponent<NavMeshAgent>().speed = speed;
     }
+
+    public void setDMG(float damage)
+    {
+        dmg = damage;
+    }
+    #endregion
 }

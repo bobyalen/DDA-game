@@ -85,19 +85,15 @@ public class Guns : MonoBehaviour
         canShoot = false;
         bool shotHit = false;
         animation.SetTrigger("Shot");
-        Debug.Log("Shooting");
         ammo--;
        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
         {
             string name = hit.transform.name;
-            Debug.Log(name);
             if(hit.collider.CompareTag("Enemy"))
             {
                 shotHit = true;
-                Debug.Log("Here");
                 hit.collider.GetComponent<DamageHandler>().Damage(damage);
                 float health = hit.collider.GetComponent<DamageHandler>().getHealth();
-                Debug.Log(health);
                 hit.collider.GetComponent<Bear>().hit();
                 if (health <= 0)
                 {

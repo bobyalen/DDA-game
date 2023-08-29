@@ -42,10 +42,7 @@ public class PlayerModel : MonoBehaviour
         hitCounter++;
     }
 
-    float avgHits()
-    {
-        return (float)hitTimer/hitCounter;
-    }
+
 
     public int killCounter()
     {
@@ -61,7 +58,6 @@ public class PlayerModel : MonoBehaviour
         hitTimer += Time.deltaTime;
         if (hitTimer >= resetTimer)
         {
-            Debug.Log("AVG Hits: " + avgHits());
             hitTimer= 0;
             hitCounter= 0;        }
     }
@@ -76,13 +72,10 @@ public class PlayerModel : MonoBehaviour
         }
 
     }
-    public float CalculateAccuracy()
-    {
-        if (shots == 0)
-            return 0f;
 
-        return ((float)shotsHit/shots)*100;
-    }
+
+    #region calculations
+    
 
     public void updateDeath()
     {
@@ -91,4 +84,27 @@ public class PlayerModel : MonoBehaviour
 
     public int getShots() { return shots;}
     public int getShotsHit() { return shotsHit; }
+    
+    
+
+    //player accuracy and amount of times hit
+    public float CalculateAccuracy()
+    {
+        if (shots == 0)
+            return 0f;
+
+        Debug.Log("Shots hit: " + shotsHit);
+        Debug.Log("Shots fired: " + shots);
+        float acc = ((float)shotsHit/(float)shots);
+        Debug.Log("Accuracy: " + acc);
+        return (int)acc * 100;
+    } 
+
+    public float avgHits()
+    {
+        if (hitCounter == 0)
+            return 100f;
+        return (float)hitTimer/(float)hitCounter *100;
+    }
+    #endregion
 }

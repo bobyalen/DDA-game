@@ -54,6 +54,7 @@ public class PredatorController : MonoBehaviour
         {
             Vector3 newSpawn = new Vector3(bearSpawn.position.x + Random.Range(-10, 50), bearSpawn.position.y, bearSpawn.position.z + Random.Range(-10, 50));
             //Instantiate(Tospawn[0], newSpawn, Quaternion.identity);
+            DDA.setDiff();
             Instantiate(SpawnObjects[0].enemyBase.predators, newSpawn, Quaternion.identity);
 
             setHealth(SpawnObjects[0]);
@@ -119,21 +120,18 @@ public class PredatorController : MonoBehaviour
 
         //enemy.enemyBase.baseHP =Random.Range(100, 300);
         enemy.enemyBase.baseHP = (int)DDA.GetStats().HP;
-        Debug.Log(enemy.enemyBase.baseHP);
         enemy.enemyBase.predators.GetComponent<DamageHandler>().setHealth(enemy.enemyBase.baseHP);
     }
     
     //Change predator speed (used for DDA)
     public void setSpeed(Enemy enemy)
     {
-        enemy.enemyBase.speed =Random.Range(3.0f, 5.5f);
-        Debug.Log(enemy.enemyBase.speed);
+        enemy.enemyBase.speed = (int)DDA.GetStats().speed;
         enemy.enemyBase.predators.GetComponent<Bear>().setSpeed(enemy.enemyBase.speed);
     }
     public void setAttack(Enemy enemy)
     {
-        enemy.enemyBase.speed =Random.Range(3.0f, 5.5f);
-        Debug.Log(enemy.enemyBase.speed);
+        enemy.enemyBase.baseAttack = (int)DDA.GetStats().damage;
         enemy.enemyBase.predators.GetComponent<Bear>().setSpeed(enemy.enemyBase.speed);
     }
     #endregion
