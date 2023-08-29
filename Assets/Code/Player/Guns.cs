@@ -6,7 +6,7 @@ using TMPro;
 
 public class Guns : MonoBehaviour
 {
-    public float damage = 125;
+    public float damage = 2;
     public float shotDelay; 
     public float reloadTime;
     public float range;
@@ -50,7 +50,7 @@ public class Guns : MonoBehaviour
         ammo = 5;
         shotDelay = 1.5f;
         reloadTime = 2.2f;
-        damage = 125;
+        damage = 2;
     }
     
     public void selMRAD()
