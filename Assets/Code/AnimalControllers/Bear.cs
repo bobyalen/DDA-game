@@ -141,6 +141,7 @@ public class Bear : MonoBehaviour
         GameObject player = GameObject.Find("Player");
         player.GetComponent<playerController>().addScore();
         GameObject.Find("Predators").GetComponent<PredatorController>().enemyKilled();
+        GetComponent<Drops>().dropLoot(this.transform.position);
         Destroy(gameObject);
     }
     void canAttack()

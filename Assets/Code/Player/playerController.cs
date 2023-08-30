@@ -6,7 +6,7 @@ using TMPro;
 
 public class playerController : MonoBehaviour
 {
-    [SerializeField] float maxHealth = 100;
+    [SerializeField] public float maxHealth = 100;
     public float health;
     int score;
     public TMP_Text healthText;
@@ -86,6 +86,16 @@ public class playerController : MonoBehaviour
     public void addScore()
     {
         score+=150;
+    }
+
+
+    public void heal(int amount)
+    {
+        if (health + amount <= maxHealth)
+        {
+            health += amount;
+        }
+        else health = maxHealth;
     }
 
 }

@@ -5,18 +5,36 @@ using UnityEngine;
 public class Drops : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField]
-    GameObject healthKit;
-    public List<HealthDrop> drops;
+    public List<HealthDrop> drops = new List<HealthDrop>();
 
-    void Start()
+    HealthDrop getDrop()
     {
-        
+        int dropChance = Random.Range(1, 101);
+        List<HealthDrop> dropList = new List<HealthDrop>();
+        foreach (HealthDrop drop in drops)
+        {
+            if (dropChance <= drop.dropRate)
+            {
+                dropList.Add(drop);
+            }
+        }
+        if (dropList.Count > 0)
+        {
+           HealthDrop dropped = dropList[Random.Range(0,dropList.Count)];
+            return dropped;
+        }
+
+        return null;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void dropLoot(Vector3 pos)
     {
-        
+        HealthDrop drop = getDrop();
+        if (drop != null)
+        {
+            GameObject Loot = Instantiate(drop.sprite, pos, Quaternion.identity);
+
+        }
     }
 }

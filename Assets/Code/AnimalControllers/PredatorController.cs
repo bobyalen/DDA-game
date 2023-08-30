@@ -63,20 +63,6 @@ public class PredatorController : MonoBehaviour
             enemyNum++;
         }
     }
-    /*
-    IEnumerator spawn()
-    {
-        while (Tospawn.Count > 0)
-        {
-            Vector3 newSpawn = new Vector3(bearSpawn.position.x + Random.Range(-10, 50), 10, bearSpawn.position.z + Random.Range(-10, 50));
-
-            Instantiate(Tospawn[0], newSpawn, Quaternion.identity);
-            Tospawn.RemoveAt(0);
-            yield return new WaitForSeconds(1);
-            enemyNum++;
-        }
-    }
-    */
 
 
     public void EnemyCost()

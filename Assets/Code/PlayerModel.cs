@@ -95,16 +95,17 @@ public class PlayerModel : MonoBehaviour
 
         Debug.Log("Shots hit: " + shotsHit);
         Debug.Log("Shots fired: " + shots);
-        float acc = ((float)shotsHit/(float)shots);
+        float acc = ((float)shotsHit/(float)shots)*100;
         Debug.Log("Accuracy: " + acc);
-        return (int)acc * 100;
+        return (int)acc ;
     } 
 
     public float avgHits()
     {
         if (hitCounter == 0)
             return 100f;
-        return (float)hitTimer/(float)hitCounter *100;
+        float avghitscore = 1f - ((float)hitTimer / (float)hitCounter);
+        return avghitscore * 100;
     }
     #endregion
 }
