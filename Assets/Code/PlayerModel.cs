@@ -15,6 +15,9 @@ public class PlayerModel : MonoBehaviour
     float hitTimer;
     float resetTimer = 5.0f;
     int deaths;
+    int maxHits;
+    [SerializeField]
+    playerController player;
 
     
     // Start is called before the first frame update
@@ -84,6 +87,8 @@ public class PlayerModel : MonoBehaviour
 
     public int getShots() { return shots;}
     public int getShotsHit() { return shotsHit; }
+
+
     
     
 
