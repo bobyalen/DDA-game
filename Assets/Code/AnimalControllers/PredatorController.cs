@@ -19,6 +19,7 @@ public class PredatorController : MonoBehaviour
     int x, z;
     public int enemyNum;
     public int enemyCost;
+    int avgDMG;
     // Start is called before the first frame update
     void Start()
     {
@@ -118,7 +119,13 @@ public class PredatorController : MonoBehaviour
     public void setAttack(Enemy enemy)
     {
         enemy.enemyBase.baseAttack = (int)DDA.GetStats().damage;
+        avgDMG += enemy.enemyBase.baseAttack;
         enemy.enemyBase.predators.GetComponent<Bear>().setDMG(enemy.enemyBase.baseAttack);
+    }
+
+    public int getavgDMG()
+    {
+        return avgDMG/enemyNum;
     }
     #endregion
 }

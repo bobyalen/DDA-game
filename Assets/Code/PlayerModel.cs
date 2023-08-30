@@ -14,12 +14,13 @@ public class PlayerModel : MonoBehaviour
     float Points;
     float hitTimer;
     float resetTimer = 5.0f;
-    int deaths;
+    int dmg;
     int maxHits;
     [SerializeField]
     playerController player;
+    [SerializeField]
+    PredatorController predator;
 
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,8 @@ public class PlayerModel : MonoBehaviour
         kills = 0;
         Points = 0;
         hitTimer = 0;
-        deaths = 0;
+        dmg = 0;
+        maxHits = 0;
     }
 
     public void updateKills()
@@ -45,7 +47,23 @@ public class PlayerModel : MonoBehaviour
         hitCounter++;
     }
 
+    void updatMaxHits()
+    {
+        dmg = Mathf.RoundToInt(predator.getavgDMG()/predator.enemyNum);
 
+    }
+
+    public void playerHealed(int amount)
+    {
+        if (amount > dmg)
+        {
+            if (player.health+amount >=player.maxHealth)
+            {
+                amount= Mathf.RoundToInt(player.maxHealth-player.health);
+            }
+            maxHits += Mathf.RoundToInt(amount / dmg);
+        }
+    }
 
     public int killCounter()
     {
@@ -78,12 +96,6 @@ public class PlayerModel : MonoBehaviour
 
 
     #region calculations
-    
-
-    public void updateDeath()
-    {
-        deaths++;
-    }
 
     public int getShots() { return shots;}
     public int getShotsHit() { return shotsHit; }
@@ -109,8 +121,10 @@ public class PlayerModel : MonoBehaviour
     {
         if (hitCounter == 0)
             return 100f;
-        float avghitscore = 1f - ((float)hitTimer / (float)hitCounter);
-        return avghitscore * 100;
+        else if (hitCounter >= maxHits)
+            return 0f;
+        float avghitscore = Mathf.Clamp01(1f - ((float)hitTimer / (float)hitCounter));
+        return avghitscore*100f;
     }
     #endregion
 }
