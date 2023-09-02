@@ -109,11 +109,7 @@ public class PlayerModel : MonoBehaviour
     {
         if (shots == 0)
             return 0f;
-
-        Debug.Log("Shots hit: " + shotsHit);
-        Debug.Log("Shots fired: " + shots);
         float acc = ((float)shotsHit/(float)shots)*100;
-        Debug.Log("Accuracy: " + acc);
         return (int)acc ;
     } 
 

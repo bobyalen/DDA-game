@@ -69,7 +69,7 @@ public class DDAControl : MonoBehaviour
         timeSurvived += Time.deltaTime;
         if (Input.GetKey(KeyCode.I))
         {
-            Debug.Log("Kill between kills: " + calculateScore());
+            Debug.Log("Time between kills: " + killTime());
         }
     }
 
@@ -81,10 +81,6 @@ public class DDAControl : MonoBehaviour
     float calculateScore()
     {
         float avgScore = ((float)killTime()*0.45f) + ((float)player.CalculateAccuracy()*0.25f) + ((float)player.avgHits()*0.35f);
-
-        Debug.Log("AVG Hits: " + (player.avgHits() * 0.35f));
-        Debug.Log("Kill between kills: " + killTime() * 0.45f);
-        Debug.Log("final Accuracy: " + (player.CalculateAccuracy()));
         return avgScore;
     }
 
@@ -92,10 +88,10 @@ public class DDAControl : MonoBehaviour
     {
         //time to kill
         float worstTTK = 15.0f;
+        float bestTTK = 8.0f;
         float TTK = timeSurvived / (float)player.killCounter();
-        float normalTTK = Mathf.Clamp01(TTK / worstTTK);
-        float score = (1.0f-normalTTK)*100f;
-        return score;
+        TTK = Mathf.Clamp(TTK, bestTTK, worstTTK);
+        return (1.0f-(TTK-bestTTK)/(worstTTK/bestTTK))*100f;
 
     }
 

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 4279895481309025055, guid: 6c5ceba3ce03878458b10ee2a33efd97, type: 3}
   lootName: HealthKit
-  dropRate: 100
+  dropRate: 20
