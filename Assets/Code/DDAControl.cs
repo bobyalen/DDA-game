@@ -94,7 +94,7 @@ public class DDAControl : MonoBehaviour
         float worstTTK = 15.0f;
         float TTK = timeSurvived / (float)player.killCounter();
         float normalTTK = Mathf.Clamp01(TTK / worstTTK);
-        int score = Mathf.RoundToInt((1.0f - normalTTK) * 100);
+        float score = (1.0f-normalTTK)*100f;
         return score;
 
     }
