@@ -125,11 +125,10 @@ public class PredatorController : MonoBehaviour
         avgDMG += enemy.enemyBase.baseAttack;
         enemy.enemyBase.predators.GetComponent<Bear>().setDMG(enemy.enemyBase.baseAttack);
     }
-
+    */
     public int getavgDMG()
     {
         return avgDMG/enemyNum;
     }
-    */
     #endregion
 }
