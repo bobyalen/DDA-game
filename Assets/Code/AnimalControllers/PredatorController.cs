@@ -57,9 +57,9 @@ public class PredatorController : MonoBehaviour
             //Instantiate(Tospawn[0], newSpawn, Quaternion.identity);
             DDA.setDiff();
             Instantiate(SpawnObjects[0].enemyBase.predators, newSpawn, Quaternion.identity);
-
-            setHealth(SpawnObjects[0]);
-            setSpeed(SpawnObjects[0]);
+            setStats(SpawnObjects[0]);
+            //setHealth(SpawnObjects[0]);
+            //setSpeed(SpawnObjects[0]);
             Tospawn.RemoveAt(0);
             enemyNum++;
         }
@@ -102,11 +102,21 @@ public class PredatorController : MonoBehaviour
 
     #region enemyStats
     //Change predator HP (used for DDA)
+    void setStats(Enemy enemy)
+    {
+        enemy.enemyBase.baseHP= DDA.GetHP();
+        enemy.enemyBase.predators.GetComponent<DamageHandler>().setHealth(enemy.enemyBase.baseHP);
+        enemy.enemyBase.speed= DDA.GetSpeed(enemy.enemyBase.baseHP);
+        enemy.enemyBase.predators.GetComponent<Bear>().setSpeed(enemy.enemyBase.speed);
+        enemy.enemyBase.baseAttack= DDA.GetDmg(enemy.enemyBase.baseHP);
+        enemy.enemyBase.predators.GetComponent<Bear>().setDMG(enemy.enemyBase.baseAttack);
+    }
+    /*
     public void setHealth(Enemy enemy)
     {
 
         //enemy.enemyBase.baseHP =Random.Range(100, 300);
-        enemy.enemyBase.baseHP = (int)DDA.GetStats().HP;
+        enemy.enemyBase.baseHP = (int)DDA.Stats().HP;
         enemy.enemyBase.predators.GetComponent<DamageHandler>().setHealth(enemy.enemyBase.baseHP);
     }
     
@@ -122,7 +132,7 @@ public class PredatorController : MonoBehaviour
         avgDMG += enemy.enemyBase.baseAttack;
         enemy.enemyBase.predators.GetComponent<Bear>().setDMG(enemy.enemyBase.baseAttack);
     }
-
+    */
     public int getavgDMG()
     {
         return avgDMG/enemyNum;
