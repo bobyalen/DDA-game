@@ -19,10 +19,10 @@ public class DDAControl : MonoBehaviour
     [System.Serializable]
     public class difficultyStats
     {
-        public float speed;
-        public float HP;
-        public float damage;
-        public float aggroRange;
+        public Vector2 speed;
+        public Vector2 HP;
+        public Vector2 damage;
+        public Vector2 aggroRange;
     }
 
     public difficultyStats BeginnerStats;
@@ -49,6 +49,7 @@ public class DDAControl : MonoBehaviour
     {
         //enemy= GameObject.Find("Predators").GetComponent<PredatorController.Enemy>();
         Reset();
+        //if (PlayerPrefs)
         currentStats = enemyDiff();
     }
 
@@ -80,20 +81,38 @@ public class DDAControl : MonoBehaviour
    
     public int GetHP()
     {
-        if (currentDifficulty == difficulty.Normal || currentDifficulty == difficulty.Hard || currentDifficulty == difficulty.Master)
-        {
-            Debug.Log("Works");
-        }
         return (int)Random.Range(currentStats.HP.x, currentStats.HP.y);
     }
     
-    public int GetSpeed()
+    public int GetSpeed(int HP)
     {
+        if (currentDifficulty == difficulty.Normal || currentDifficulty == difficulty.Hard || currentDifficulty == difficulty.Master)
+        {
+            if ( HP >= (currentStats.HP.x+ (currentStats.HP.y- currentStats.HP.x)*0.8f))
+            {
+                return (int)Random.Range(currentStats.speed.x,(currentStats.speed.y -currentStats.speed.x)*0.25f);
+            }
+            else if (HP <= (currentStats.HP.x + (currentStats.HP.y - currentStats.HP.x) * 0.25f))
+            {
+                return (int)Random.Range(currentStats.speed.x + (currentStats.speed.y - currentStats.speed.x)*0.8f, currentStats.speed.y);
+            }
+        }
         return (int)Random.Range(currentStats.speed.x, currentStats.speed.y);
     }
 
-    public int GetDmg()
+    public int GetDmg(int HP)
     {
+        if (currentDifficulty == difficulty.Normal || currentDifficulty == difficulty.Hard || currentDifficulty == difficulty.Master)
+        {
+            if (HP >= (currentStats.HP.x + (currentStats.HP.y - currentStats.HP.x) * 0.8f))
+            {
+                return (int)Random.Range(currentStats.damage.x, (currentStats.damage.y - currentStats.damage.x) * 0.25f);
+            }
+            else if (HP <= (currentStats.HP.x + (currentStats.HP.y - currentStats.HP.x) * 0.25f))
+            {
+                return (int)Random.Range(currentStats.damage.x + (currentStats.damage.y - currentStats.damage.x) * 0.8f, currentStats.damage.y);
+            }
+        }
         return (int)Random.Range(currentStats.damage.x, currentStats.damage.y);
     }
 

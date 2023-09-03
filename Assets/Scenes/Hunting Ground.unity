@@ -792,10 +792,9 @@ MonoBehaviour:
   bearSpawn: {fileID: 1037954943}
   enemies:
   - enemyBase: {fileID: 11400000, guid: 3cee2c854fcc4b045a0120d6e751b991, type: 2}
-    cost: 2
   SpawnObjects: []
   enemyNum: 0
-  enemyCost: 0
+  maxEnemies: 0
 --- !u!4 &214446179 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: f8447ed3459ba5d46a002c9ff0695add, type: 3}
@@ -1594,35 +1593,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BeginnerStats:
-    speed: 5
-    HP: 5
-    damage: 5
-    aggroRange: 500
+    speed: {x: 5, y: 7}
+    HP: {x: 8, y: 19}
+    damage: {x: 8, y: 8}
+    aggroRange: {x: 500, y: 500}
   easyStats:
-    speed: 5
-    HP: 8
-    damage: 10
-    aggroRange: 550
+    speed: {x: 5, y: 8}
+    HP: {x: 10, y: 19}
+    damage: {x: 8, y: 12}
+    aggroRange: {x: 500, y: 500}
   normalStats:
-    speed: 8
-    HP: 12
-    damage: 12
-    aggroRange: 600
+    speed: {x: 6, y: 9}
+    HP: {x: 15, y: 20}
+    damage: {x: 10, y: 15}
+    aggroRange: {x: 550, y: 550}
   hardStats:
-    speed: 10
-    HP: 12
-    damage: 15
-    aggroRange: 600
+    speed: {x: 8, y: 12}
+    HP: {x: 16, y: 30}
+    damage: {x: 10, y: 20}
+    aggroRange: {x: 550, y: 600}
   masterStats:
-    speed: 12
-    HP: 15
-    damage: 15
-    aggroRange: 750
+    speed: {x: 8, y: 15}
+    HP: {x: 16, y: 35}
+    damage: {x: 15, y: 25}
+    aggroRange: {x: 600, y: 700}
   player: {fileID: 1037954946}
   playerStats: {fileID: 1037954945}
   enemy:
     enemyBase: {fileID: 11400000, guid: 3cee2c854fcc4b045a0120d6e751b991, type: 2}
-    cost: 0
   currentDifficulty: 0
 --- !u!4 &798683702
 Transform:

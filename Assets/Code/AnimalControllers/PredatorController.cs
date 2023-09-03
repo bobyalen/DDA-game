@@ -18,13 +18,16 @@ public class PredatorController : MonoBehaviour
     List<GameObject> Tospawn = new List<GameObject>();
     int x, z;
     public int enemyNum;
-    public int enemyCost;
+    public int maxEnemies;
+    int wave;
     int avgDMG;
     // Start is called before the first frame update
     void Start()
     {
         //StartCoroutine(spawnEnemy());
         //EnemyCost();
+        wave= 1;
+        maxEnemies = 12;
     }
 
     /*
@@ -55,10 +58,10 @@ public class PredatorController : MonoBehaviour
         {
             Vector3 newSpawn = new Vector3(bearSpawn.position.x + Random.Range(-10, 50), bearSpawn.position.y, bearSpawn.position.z + Random.Range(-10, 50));
             //Instantiate(Tospawn[0], newSpawn, Quaternion.identity);
-            DDA.setDiff();
+            //DDA.setDiff();
             Instantiate(SpawnObjects[0].enemyBase.predators, newSpawn, Quaternion.identity);
+
             setStats(SpawnObjects[0]);
-            //setHealth(SpawnObjects[0]);
             //setSpeed(SpawnObjects[0]);
             Tospawn.RemoveAt(0);
             enemyNum++;
@@ -68,36 +71,27 @@ public class PredatorController : MonoBehaviour
 
     public void EnemyCost()
     {
-        enemyCost= 10;
         EnemyWaves();
     }
 
     public void EnemyWaves()
     {
-        while (enemyCost > 0)
-        {
-            int enemyType = Random.Range(0,enemies.Count);
-            int cost = enemies[enemyType].cost;
-            Enemy newspawn = enemies[enemyType];
-            
-            if (enemyCost-cost >= 0) 
-            {
-                Tospawn.Add(enemies[enemyType].enemyBase.predators);
-                SpawnObjects.Add(newspawn);
-                enemyCost -= cost;
-            }
-            else if(enemyCost<=0)
-            {
-                break;
-            }
+        int enemyType = Random.Range(0,enemies.Count);
+        //number of enemies to spawn
+        int spawnNum = Mathf.Min((wave - 1) + 5,maxEnemies);
+        Enemy newspawn = enemies[enemyType];
+        for (int i = 0;i<spawnNum;i++)
+        { 
+            Tospawn.Add(enemies[enemyType].enemyBase.predators);
+            SpawnObjects.Add(newspawn);
         }
+        wave++;
     }
 
     [System.Serializable]
     public class Enemy
     {
        public Enemies enemyBase;
-       public int cost;
     }
 
     #region enemyStats
@@ -111,31 +105,31 @@ public class PredatorController : MonoBehaviour
         enemy.enemyBase.baseAttack= DDA.GetDmg(enemy.enemyBase.baseHP);
         enemy.enemyBase.predators.GetComponent<Bear>().setDMG(enemy.enemyBase.baseAttack);
     }
+
     /*
     public void setHealth(Enemy enemy)
     {
-
-        //enemy.enemyBase.baseHP =Random.Range(100, 300);
-        enemy.enemyBase.baseHP = (int)DDA.Stats().HP;
+        enemy.enemyBase.baseHP = (int)DDA.GetHP();
         enemy.enemyBase.predators.GetComponent<DamageHandler>().setHealth(enemy.enemyBase.baseHP);
     }
     
     //Change predator speed (used for DDA)
     public void setSpeed(Enemy enemy)
     {
-        enemy.enemyBase.speed = (int)DDA.GetStats().speed;
+        enemy.enemyBase.speed = (int)DDA.GetSpeed();
         enemy.enemyBase.predators.GetComponent<Bear>().setSpeed(enemy.enemyBase.speed);
     }
     public void setAttack(Enemy enemy)
     {
-        enemy.enemyBase.baseAttack = (int)DDA.GetStats().damage;
+        enemy.enemyBase.baseAttack = (int)DDA.GetDmg();
         avgDMG += enemy.enemyBase.baseAttack;
         enemy.enemyBase.predators.GetComponent<Bear>().setDMG(enemy.enemyBase.baseAttack);
     }
-    */
+
     public int getavgDMG()
     {
         return avgDMG/enemyNum;
     }
+    */
     #endregion
 }
