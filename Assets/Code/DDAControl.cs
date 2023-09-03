@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -49,8 +50,19 @@ public class DDAControl : MonoBehaviour
     {
         //enemy= GameObject.Find("Predators").GetComponent<PredatorController.Enemy>();
         Reset();
-        //if (PlayerPrefs)
-        currentStats = enemyDiff();
+        if (PlayerPrefs.HasKey("Difficulty"))
+        {
+            string difficultyString = PlayerPrefs.GetString("Difficulty");
+            if (Enum.TryParse(difficultyString, out difficulty diff))
+            {
+                currentDifficulty = diff;
+            }
+        }
+        else
+        {
+            currentDifficulty = difficulty.Normal;
+        }
+            currentStats = enemyDiff();
     }
 
     public difficultyStats GetStats()
@@ -76,6 +88,8 @@ public class DDAControl : MonoBehaviour
 
     public difficulty GetDifficulty()
     {
+       PlayerPrefs.SetString("Difficulty", currentDifficulty.ToString());
+        PlayerPrefs.Save();
         return currentDifficulty;
     }
    
