@@ -19,6 +19,7 @@ public class playerController : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        remaingTime = 0;
     }
 
     // Update is called once per frame
@@ -30,14 +31,14 @@ public class playerController : MonoBehaviour
         timerText.text = time.ToString();
         if (showTimer)
         {
-            if (remaingTime > 0)
+            if (health > 0)
             {
-                remaingTime -= Time.deltaTime;
+                remaingTime += Time.deltaTime;
             }
             else
             {
                 showTimer = false;
-                Debug.Log("Time up");
+                Debug.Log("Died");
             }
         }
         end();
