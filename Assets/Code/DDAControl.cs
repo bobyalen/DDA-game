@@ -181,5 +181,21 @@ public class DDAControl : MonoBehaviour
     }
 
 
-
+    public int diffScore()
+    {
+        switch (currentDifficulty)
+        {
+            case difficulty.Beginner:
+                return 3;
+            case difficulty.Easy:
+                return 5;
+            case difficulty.Normal:
+                return 8;
+            case difficulty.Hard:
+                return 10;
+            case difficulty.Master:
+                return 12;
+        }
+        return 8;
+    }
 }

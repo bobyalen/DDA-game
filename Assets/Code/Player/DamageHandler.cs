@@ -16,7 +16,6 @@ public class DamageHandler : MonoBehaviour
 
     public void setHealth(int newHealth)
     {
-        Debug.Log(newHealth);
         maxHealth = newHealth;
         health = newHealth;
         HPBar.updateBar(health,maxHealth);

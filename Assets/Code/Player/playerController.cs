@@ -19,6 +19,10 @@ public class playerController : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        if (showTimer)
+        {
+            InvokeRepeating("diffScore", 1f, 1f);
+        }
     }
 
     // Update is called once per frame
@@ -32,12 +36,11 @@ public class playerController : MonoBehaviour
         {
             if (remaingTime > 0)
             {
-                remaingTime -= Time.deltaTime;
+                remaingTime += Time.deltaTime;
             }
             else
             {
                 showTimer = false;
-                Debug.Log("Time up");
             }
         }
         end();
@@ -80,6 +83,11 @@ public class playerController : MonoBehaviour
             TakeDamage(other.GetComponentInParent<Bear>().dmg);
             Debug.Log(other.GetComponentInParent<Bear>().dmg);
         }
+    }
+
+    void diffScore()
+    {
+        score += GameObject.Find("DDAController").GetComponent<DDAControl>().diffScore();
     }
 
 
