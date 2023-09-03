@@ -72,8 +72,6 @@ public class Guns : MonoBehaviour
         if (shooting && !reloading && ammo > 0 && canShoot) 
         {
             Shoot();
-            Debug.Log("Shots Fired: " + playerModel.getShots());
-            Debug.Log("Shots Hit: " + playerModel.getShotsHit());
         }
 
         if (Input.GetKeyDown(KeyCode.R) && !reloading && ammo < magazineSize)
@@ -91,16 +89,27 @@ public class Guns : MonoBehaviour
        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
         {
             string name = hit.transform.name;
-            if(hit.collider.CompareTag("Enemy"))
+            if(hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Bearattack"))
             {
-                hit.collider.GetComponent<DamageHandler>().Damage(damage);
-                float health = hit.collider.GetComponent<DamageHandler>().getHealth();
+                GameObject Attacker;
+                if (hit.collider.CompareTag("Bearattack"))
+                {
+                    Attacker = hit.collider.transform.parent.gameObject;
+                    //hit.collider.GetComponentInParent<DamageHandler>().Damage(damage);
+                }
+                else
+                {
+                    Attacker = hit.collider.transform.gameObject;
+                    //hit.collider.GetComponent<DamageHandler>().Damage(damage);
+                }
+                Attacker.GetComponent<DamageHandler>().Damage(damage);
+                float health = Attacker.GetComponent<DamageHandler>().getHealth();
                 if (health <= 0)
                 {
-                    hit.collider.GetComponent<Bear>().die();
+                    Attacker.GetComponent<Bear>().die();
                 }
                 shotHit = true;
-                hit.collider.GetComponent<Bear>().hit();
+                Attacker.GetComponent<Bear>().hit();
             }
         }
        playerModel.updateShots(shotHit);

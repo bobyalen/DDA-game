@@ -39,7 +39,6 @@ public class Bear : MonoBehaviour
 
         if (!dead)
         {
-            Debug.Log("Not Dead");
             chaseRange = Physics.CheckSphere(transform.position, agroRange, playerMask);
             attacking = Physics.CheckSphere(transform.position, attackRange, playerMask);
 
@@ -115,7 +114,6 @@ public class Bear : MonoBehaviour
     {
         if (!dead)
         {
-            Debug.Log("Hit");
             attacking = false;
             wandering = false;
             if (!animate.GetCurrentAnimatorStateInfo(0).IsName("Get Hit Front"))

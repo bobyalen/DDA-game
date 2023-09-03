@@ -9,6 +9,7 @@ public class playerController : MonoBehaviour
     [SerializeField] public float maxHealth = 100;
     public float health;
     int score;
+    Vector2 diffScoring;
     public TMP_Text healthText;
     public TMP_Text scoreText;
     public TMP_Text final;
@@ -48,7 +49,7 @@ public class playerController : MonoBehaviour
 
     public void end()
     {
-        if (health <= 0 || remaingTime <= 0)
+        if (health <= 0)
         {
             Time.timeScale = 0;
             finalScreen.Instance.Show();
@@ -80,20 +81,27 @@ public class playerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Bearattack")
         {
+            /*
+            if (other.GetComponentInParent<Bear>().attackReset)
+            {
+                TakeDamage(other.GetComponentInParent<Bear>().dmg);
+            }
+            */
             TakeDamage(other.GetComponentInParent<Bear>().dmg);
-            Debug.Log(other.GetComponentInParent<Bear>().dmg);
+
         }
     }
 
     void diffScore()
     {
-        score += GameObject.Find("DDAController").GetComponent<DDAControl>().diffScore();
+        diffScoring = GameObject.Find("DDAController").GetComponent<DDAControl>().diffScore();
+        score += (int)diffScoring.x;
     }
 
 
     public void addScore()
     {
-        score+=150;
+        score+= (int)diffScoring.y;
     }
 
 

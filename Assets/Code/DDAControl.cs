@@ -81,10 +81,6 @@ public class DDAControl : MonoBehaviour
     {
         //time game  has ben played for 
         timeSurvived += Time.deltaTime;
-        if (Input.GetKey(KeyCode.I))
-        {
-            Debug.Log("Time between kills: " + killTime());
-        }
     }
 
     public difficulty GetDifficulty()
@@ -152,30 +148,35 @@ public class DDAControl : MonoBehaviour
     {
         float playerScore = calculateScore();
         Debug.Log("Performance Score: " + playerScore);
-        if (playerScore <= 0.3f)
+        if (playerScore <= 0.25f)
         {
-            currentDifficulty = difficulty.Beginner;
+            DecreaseDiff();
         }
-        if (playerScore <= 0.45f)
+        if (playerScore >= 0.8f)
         {
-            currentDifficulty = difficulty.Easy;
-        }
-        if (playerScore <= 0.6f)
-        {
-            currentDifficulty = difficulty.Normal;
-        }
-        if (playerScore <= 0.75f)
-        {
-            currentDifficulty = difficulty.Hard;
-        }
-        else
-        {
-            currentDifficulty = difficulty.Master;
+            IncreaseDiff();
         }
         currentStats = enemyDiff();
     }
 
+    void DecreaseDiff()
+    {
+        if (currentDifficulty > difficulty.Beginner)
+        {
+            currentDifficulty -= 1;
+            Debug.Log("Increased difficulty to: " + currentDifficulty.ToString());
+        }
+    }
 
+    void IncreaseDiff()
+    {
+        if (currentDifficulty < difficulty.Master)
+        {
+            currentDifficulty += 1;
+            Debug.Log("Increased difficulty to: " + currentDifficulty.ToString());
+        }
+    }
+    
 
     difficultyStats enemyDiff()
     {
@@ -196,21 +197,21 @@ public class DDAControl : MonoBehaviour
     }
 
 
-    public int diffScore()
+    public Vector2 diffScore()
     {
         switch (currentDifficulty)
         {
             case difficulty.Beginner:
-                return 3;
+                return new Vector2(3,100);
             case difficulty.Easy:
-                return 5;
+                return new Vector2(5,125);
             case difficulty.Normal:
-                return 8;
+                return new Vector2(8, 150);
             case difficulty.Hard:
-                return 10;
+                return new Vector2(10, 175);
             case difficulty.Master:
-                return 12;
+                return new Vector2(12, 200);
         }
-        return 8;
+        return new Vector2(8, 150);
     }
 }

@@ -46,19 +46,19 @@ public class PredatorController : MonoBehaviour
     public void enemyKilled()
     {
         enemyNum--;
-        Debug.Log("Enemies: " + enemyNum);
         playerStats.updateKills();
     }
     void Update()
     {
         if (enemyNum <=0)
         {
+            DDA.setDiff();
             EnemyWaves();
             playerStats.resetAccuracy();
         }
         if (Tospawn.Count > 0)
         {
-            Vector3 newSpawn = new Vector3(bearSpawn.position.x + Random.Range(-10, 50), bearSpawn.position.y, bearSpawn.position.z + Random.Range(-10, 50));
+            Vector3 newSpawn = new Vector3(bearSpawn.position.x + Random.Range(-20, 30), bearSpawn.position.y, bearSpawn.position.z + Random.Range(-20, 30));
             //Instantiate(Tospawn[0], newSpawn, Quaternion.identity);
             //DDA.setDiff();
             Instantiate(SpawnObjects[0].enemyBase.predators, newSpawn, Quaternion.identity);
