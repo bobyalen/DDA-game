@@ -22,12 +22,11 @@ public class Timer : MonoBehaviour
         {
             if (remaingTime > 0)
             {
-                remaingTime-= Time.deltaTime;
+                remaingTime+= Time.deltaTime;
             }
             else
             {
                 showTimer= false;
-                Debug.Log("Time up");
             }
         }
     }

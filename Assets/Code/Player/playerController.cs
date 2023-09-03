@@ -78,7 +78,6 @@ public class playerController : MonoBehaviour
         if (other.gameObject.tag == "Bearattack")
         {
             TakeDamage(other.GetComponentInParent<Bear>().dmg);
-            Debug.Log(other.GetComponentInParent<Bear>().dmg);
         }
     }
 

@@ -19,10 +19,10 @@ public class DDAControl : MonoBehaviour
     [System.Serializable]
     public class difficultyStats
     {
-        public float speed;
-        public float HP;
-        public float damage;
-        public float aggroRange;
+        public Vector2 speed;
+        public Vector2 HP;
+        public Vector2 damage;
+        public Vector2 aggroRange;
     }
 
     public difficultyStats BeginnerStats;
@@ -49,6 +49,7 @@ public class DDAControl : MonoBehaviour
     {
         //enemy= GameObject.Find("Predators").GetComponent<PredatorController.Enemy>();
         Reset();
+        //if (PlayerPrefs)
         currentStats = enemyDiff();
     }
 
@@ -76,6 +77,25 @@ public class DDAControl : MonoBehaviour
     public difficulty GetDifficulty()
     {
         return currentDifficulty;
+    }
+   
+    public int GetHP()
+    {
+        if (currentDifficulty == difficulty.Normal || currentDifficulty == difficulty.Hard || currentDifficulty == difficulty.Master)
+        {
+            Debug.Log("Works");
+        }
+        return (int)Random.Range(currentStats.HP.x, currentStats.HP.y);
+    }
+    
+    public int GetSpeed()
+    {
+        return (int)Random.Range(currentStats.speed.x, currentStats.speed.y);
+    }
+
+    public int GetDmg()
+    {
+        return (int)Random.Range(currentStats.damage.x, currentStats.damage.y);
     }
 
     float calculateScore()
