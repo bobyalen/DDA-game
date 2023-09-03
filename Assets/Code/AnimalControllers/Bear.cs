@@ -19,33 +19,27 @@ public class Bear : MonoBehaviour
     [SerializeField] float walkDistance;
     [SerializeField] float agroRange, attackRange;
     bool chaseRange, attacking, attackReset;
-    public bool dead = false;
+    bool dead;
+    bool played;
     public float dmg;
 
-
-
-    //states
-    enum state
-    {
-        Idle,
-        Walk,
-        Chase,
-        Stun, 
-        Attack
-    }
 
     void Start()
     {
         agent= GetComponent<NavMeshAgent>();
         animate= GetComponent<Animator>();
         player = GameObject.Find("Player");
+        dead = false;
+        played= false;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (!dead)
         {
+            Debug.Log("Not Dead");
             chaseRange = Physics.CheckSphere(transform.position, agroRange, playerMask);
             attacking = Physics.CheckSphere(transform.position, attackRange, playerMask);
 
@@ -103,7 +97,7 @@ public class Bear : MonoBehaviour
             agent.SetDestination(transform.position);
         }
         boxCollider.enabled = false;
-        Invoke("canAttack", 3);
+        Invoke("canAttack", 1);
     }
 
     void newLocation()
@@ -119,30 +113,35 @@ public class Bear : MonoBehaviour
     }
     public void hit()
     {
-        Debug.Log("Hit");
-        attacking = false;
-        wandering= false;
-        if (!animate.GetCurrentAnimatorStateInfo(0).IsName("Get Hit Front"))
+        if (!dead)
         {
-            animate.SetTrigger("Get Hit Front");
+            Debug.Log("Hit");
+            attacking = false;
+            wandering = false;
+            if (!animate.GetCurrentAnimatorStateInfo(0).IsName("Get Hit Front"))
+            {
+                animate.SetTrigger("Get Hit Front");
+            }
         }
     }
 
     public void die()
     {
-        wandering= false;
-        attacking= false;
-        dead= true;
+        dead = true;
+        //wandering = false;
+        //attacking= false;
+        /*
         if(!animate.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
             animate.SetTrigger("Death");
-        }
-        Invoke("Destroy",2.5f);
+        */
+        //Invoke("Destroy",2.5f);
         GameObject player = GameObject.Find("Player");
         player.GetComponent<playerController>().addScore();
-        GameObject.Find("Predators").GetComponent<PredatorController>().enemyKilled();
+        GameObject.Find("Predators").GetComponent<PredatorController>().enemyKilled();  
         GetComponent<Drops>().dropLoot(this.transform.position);
-        Destroy(gameObject);
+        animate.SetBool("Death", true);
+        Destroy();
     }
     void canAttack()
     {

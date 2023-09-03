@@ -72,6 +72,8 @@ public class Guns : MonoBehaviour
         if (shooting && !reloading && ammo > 0 && canShoot) 
         {
             Shoot();
+            Debug.Log("Shots Fired: " + playerModel.getShots());
+            Debug.Log("Shots Hit: " + playerModel.getShotsHit());
         }
 
         if (Input.GetKeyDown(KeyCode.R) && !reloading && ammo < magazineSize)
@@ -91,14 +93,14 @@ public class Guns : MonoBehaviour
             string name = hit.transform.name;
             if(hit.collider.CompareTag("Enemy"))
             {
-                shotHit = true;
                 hit.collider.GetComponent<DamageHandler>().Damage(damage);
                 float health = hit.collider.GetComponent<DamageHandler>().getHealth();
-                hit.collider.GetComponent<Bear>().hit();
                 if (health <= 0)
                 {
                     hit.collider.GetComponent<Bear>().die();
                 }
+                shotHit = true;
+                hit.collider.GetComponent<Bear>().hit();
             }
         }
        playerModel.updateShots(shotHit);

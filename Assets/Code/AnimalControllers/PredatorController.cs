@@ -46,13 +46,15 @@ public class PredatorController : MonoBehaviour
     public void enemyKilled()
     {
         enemyNum--;
+        Debug.Log("Enemies: " + enemyNum);
         playerStats.updateKills();
     }
     void Update()
     {
         if (enemyNum <=0)
         {
-            EnemyCost();
+            EnemyWaves();
+            playerStats.resetAccuracy();
         }
         if (Tospawn.Count > 0)
         {
@@ -64,21 +66,14 @@ public class PredatorController : MonoBehaviour
             setStats(SpawnObjects[0]);
             //setSpeed(SpawnObjects[0]);
             Tospawn.RemoveAt(0);
-            enemyNum++;
         }
-    }
-
-
-    public void EnemyCost()
-    {
-        EnemyWaves();
     }
 
     public void EnemyWaves()
     {
         int enemyType = Random.Range(0,enemies.Count);
         //number of enemies to spawn
-        int spawnNum = Mathf.Min((wave - 1) + 5,maxEnemies);
+        int spawnNum = Mathf.Min((wave - 1) + 5, maxEnemies);
         Enemy newspawn = enemies[enemyType];
         for (int i = 0;i<spawnNum;i++)
         { 
@@ -86,6 +81,7 @@ public class PredatorController : MonoBehaviour
             SpawnObjects.Add(newspawn);
         }
         wave++;
+        enemyNum = SpawnObjects.Count;
     }
 
     [System.Serializable]

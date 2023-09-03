@@ -100,9 +100,13 @@ public class PlayerModel : MonoBehaviour
     public int getShots() { return shots;}
     public int getShotsHit() { return shotsHit; }
 
+    public void resetAccuracy()
+    {
+        shots= 0;
+        shotsHit= 0;
+    }
 
-    
-    
+
 
     //player accuracy and amount of times hit
     public float CalculateAccuracy()
