@@ -162,5 +162,10 @@ public class Bear : MonoBehaviour
     {
         dmg = damage;
     }
+
+    public void setAgro(int newRange)
+    {
+        agroRange = newRange;
+    }
     #endregion
 }

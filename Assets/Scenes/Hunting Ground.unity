@@ -1595,27 +1595,27 @@ MonoBehaviour:
     speed: {x: 5, y: 7}
     HP: {x: 8, y: 19}
     damage: {x: 8, y: 8}
-    aggroRange: {x: 500, y: 500}
+    aggroRange: {x: 15, y: 15}
   easyStats:
     speed: {x: 5, y: 8}
     HP: {x: 10, y: 19}
     damage: {x: 8, y: 12}
-    aggroRange: {x: 500, y: 500}
+    aggroRange: {x: 18, y: 18}
   normalStats:
     speed: {x: 6, y: 9}
     HP: {x: 15, y: 20}
     damage: {x: 10, y: 15}
-    aggroRange: {x: 550, y: 550}
+    aggroRange: {x: 20, y: 22}
   hardStats:
     speed: {x: 8, y: 12}
     HP: {x: 16, y: 30}
     damage: {x: 10, y: 20}
-    aggroRange: {x: 550, y: 600}
+    aggroRange: {x: 20, y: 25}
   masterStats:
     speed: {x: 8, y: 15}
     HP: {x: 16, y: 35}
     damage: {x: 15, y: 25}
-    aggroRange: {x: 600, y: 700}
+    aggroRange: {x: 22, y: 30}
   player: {fileID: 1037954946}
   playerStats: {fileID: 1037954945}
   enemy:
@@ -5315,11 +5315,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4826123642242436206, guid: 8467e243791ccc04eaa7bc72345f5be3, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4826123642242436206, guid: 8467e243791ccc04eaa7bc72345f5be3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4925320986316986321, guid: 8467e243791ccc04eaa7bc72345f5be3, type: 3}
       propertyPath: m_RootOrder
@@ -5368,6 +5368,10 @@ PrefabInstance:
     - target: {fileID: 5697495514724109675, guid: 8467e243791ccc04eaa7bc72345f5be3, type: 3}
       propertyPath: m_Name
       value: Bear
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697495514724109675, guid: 8467e243791ccc04eaa7bc72345f5be3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8467e243791ccc04eaa7bc72345f5be3, type: 3}

@@ -59,6 +59,10 @@ public class PredatorController : MonoBehaviour
         if (Tospawn.Count > 0)
         {
             Vector3 newSpawn = new Vector3(bearSpawn.position.x + Random.Range(-20, 30), bearSpawn.position.y, bearSpawn.position.z + Random.Range(-20, 30));
+            while (Vector3.Distance(bearSpawn.position,newSpawn) <=15)
+            {
+                newSpawn = new Vector3(bearSpawn.position.x + Random.Range(-20, 30), bearSpawn.position.y, bearSpawn.position.z + Random.Range(-20, 30));
+            }
             //Instantiate(Tospawn[0], newSpawn, Quaternion.identity);
             //DDA.setDiff();
             Instantiate(SpawnObjects[0].enemyBase.predators, newSpawn, Quaternion.identity);
