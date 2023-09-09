@@ -50,7 +50,8 @@ public class DDAControl : MonoBehaviour
     void Start()
     {
         //enemy= GameObject.Find("Predators").GetComponent<PredatorController.Enemy>();
-        Reset();
+
+        timeSurvived = 0;
         if (PlayerPrefs.HasKey("Difficulty"))
         {
             string difficultyString = PlayerPrefs.GetString("Difficulty");
@@ -71,9 +72,12 @@ public class DDAControl : MonoBehaviour
         return currentStats;
     }
 
-    void Reset()
+    public void ResetAll()
     {
         timeSurvived = 0;
+        playerStats.Reset();
+        player.Reset();
+        GameObject.Find("Predators").GetComponent<PredatorController>().Reset();
     }
 
     // Update is called once per frame
@@ -144,17 +148,20 @@ public class DDAControl : MonoBehaviour
 
     }
 
-    public void setDiff()
+    public void setDiff(int wave)
     {
-        float playerScore = calculateScore();
-        Debug.Log("Performance Score: " + playerScore);
-        if (playerScore <= 0.25f)
+        if (wave > 1)
         {
-            DecreaseDiff();
-        }
-        if (playerScore >= 0.8f)
-        {
-            IncreaseDiff();
+            float playerScore = calculateScore();
+            Debug.Log("Performance Score: " + playerScore);
+            if (playerScore <= 0.25f)
+            {
+                DecreaseDiff();
+            }
+            if (playerScore >= 0.8f)
+            {
+                IncreaseDiff();
+            }
         }
         currentStats = enemyDiff();
     }
@@ -213,5 +220,23 @@ public class DDAControl : MonoBehaviour
                 return new Vector2(12, 200);
         }
         return new Vector2(8, 150);
+    }
+
+    public int dropChance()
+    {
+        switch (currentDifficulty)
+        {
+            case difficulty.Beginner:
+                return 20;
+            case difficulty.Easy:
+                return 18;
+            case difficulty.Normal:
+                return 15;
+            case difficulty.Hard:
+                return 10;
+            case difficulty.Master:
+                return 8;
+        }
+        return 15;
     }
 }

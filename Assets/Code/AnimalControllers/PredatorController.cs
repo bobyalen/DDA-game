@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static PredatorController;
 
 public class PredatorController : MonoBehaviour
 {
@@ -26,23 +25,15 @@ public class PredatorController : MonoBehaviour
     {
         //StartCoroutine(spawnEnemy());
         //EnemyCost();
-        wave= 1;
+        Reset();
         maxEnemies = 12;
     }
 
-    /*
-    IEnumerator spawnEnemy()
+    public void Reset()
     {
-        while (enemyNum < 10)
-        {
-            Vector3 newSpawn = new Vector3(bearSpawn.position.x + Random.Range(-10, 50), 10, bearSpawn.position.z + Random.Range(-10, 50));
-
-            Instantiate(predators, newSpawn,Quaternion.identity);
-            yield return new WaitForSeconds(1);
-            enemyNum++;
-        }
+        wave = 1;
     }
-    */
+
     public void enemyKilled()
     {
         enemyNum--;
@@ -52,7 +43,7 @@ public class PredatorController : MonoBehaviour
     {
         if (enemyNum <=0)
         {
-            DDA.setDiff();
+            DDA.setDiff(wave);
             EnemyWaves();
             playerStats.resetAccuracy();
         }

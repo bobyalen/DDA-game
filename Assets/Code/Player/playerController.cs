@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class playerController : MonoBehaviour
 {
@@ -12,18 +14,22 @@ public class playerController : MonoBehaviour
     Vector2 diffScoring;
     public TMP_Text healthText;
     public TMP_Text scoreText;
-    public TMP_Text final;
     public float remaingTime;
     bool showTimer = true;
     public TMP_Text timerText;
     // Start is called before the first frame update
     void Start()
     {
+        Reset();
+    }
+    public void Reset()
+    {
         health = maxHealth;
         if (showTimer)
         {
             InvokeRepeating("diffScore", 1f, 1f);
         }
+        GetComponent<Transform>().position = new Vector3(384, 24, 481);
     }
 
     // Update is called once per frame
@@ -33,17 +39,7 @@ public class playerController : MonoBehaviour
         scoreText.text = "Score" + score.ToString();
         int time = (int)remaingTime;
         timerText.text = time.ToString();
-        if (showTimer)
-        {
-            if (remaingTime > 0)
-            {
-                remaingTime += Time.deltaTime;
-            }
-            else
-            {
-                showTimer = false;
-            }
-        }
+        remaingTime += Time.deltaTime;
         end();
     }
 
@@ -51,9 +47,11 @@ public class playerController : MonoBehaviour
     {
         if (health <= 0)
         {
-            Time.timeScale = 0;
-            finalScreen.Instance.Show();
-            final.text = "Game Over final Score: " + score.ToString();
+            PlayerPrefs.SetInt("Score", score);
+            //PlayerPrefs.Save();
+            PlayerPrefs.SetInt("Time", (int)remaingTime);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(2);
         }
     }
     
@@ -110,6 +108,7 @@ public class playerController : MonoBehaviour
         if (health + amount <= maxHealth)
         {
             health += amount;
+
         }
         else health = maxHealth;
     }

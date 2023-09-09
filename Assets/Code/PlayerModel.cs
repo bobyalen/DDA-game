@@ -27,7 +27,7 @@ public class PlayerModel : MonoBehaviour
         Reset();
     }
 
-    private void Reset()
+    public void Reset()
     {
         shots = 0;
         shotsHit= 0;

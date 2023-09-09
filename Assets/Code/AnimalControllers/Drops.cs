@@ -13,7 +13,7 @@ public class Drops : MonoBehaviour
         List<HealthDrop> dropList = new List<HealthDrop>();
         foreach (HealthDrop drop in drops)
         {
-            if (dropChance <= drop.dropRate)
+            if (dropChance <= (drop.dropRate += GameObject.Find("DDAController").GetComponent<DDAControl>().dropChance()))
             {
                 dropList.Add(drop);
             }
