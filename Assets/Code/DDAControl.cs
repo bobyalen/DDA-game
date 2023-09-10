@@ -133,7 +133,7 @@ public class DDAControl : MonoBehaviour
 
     float calculateScore()
     {
-        float avgScore = ((float)killTime()*0.45f) + ((float)player.CalculateAccuracy()*0.25f) + ((float)player.avgHits()*0.35f);
+        float avgScore = ((float)killTime()*0.45f) + ((float)player.CalculateAccuracy()*0.2f) + ((float)player.avgHits()*0.35f);
         return avgScore;
     }
 
