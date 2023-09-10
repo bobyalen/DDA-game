@@ -227,16 +227,16 @@ public class DDAControl : MonoBehaviour
         switch (currentDifficulty)
         {
             case difficulty.Beginner:
-                return 20;
+                return 30;
             case difficulty.Easy:
-                return 18;
+                return 25;
             case difficulty.Normal:
-                return 15;
+                return 20;
             case difficulty.Hard:
-                return 10;
+                return 15;
             case difficulty.Master:
-                return 8;
+                return 12;
         }
-        return 15;
+        return 20;
     }
 }
