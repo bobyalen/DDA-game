@@ -11,4 +11,5 @@ public class Enemies : ScriptableObject
     public int baseRange;
     public int baseHP;
     public int spawnRange;
+    public float speed;
 }

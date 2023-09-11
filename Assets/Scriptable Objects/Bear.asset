@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Bear
   m_EditorClassIdentifier: 
   prefabName: Bear
-  predators: {fileID: 1002125796032366932, guid: 4848a5b4f2799bc44b95c5299cad365e, type: 3}
-  baseAttack: 15
+  predators: {fileID: 5697495514724109675, guid: 8467e243791ccc04eaa7bc72345f5be3, type: 3}
+  baseAttack: 14
   baseRange: 200
-  baseHP: 300
+  baseHP: 17
   spawnRange: 1000
+  speed: 7

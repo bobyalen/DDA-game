@@ -6,7 +6,7 @@ using TMPro;
 
 public class Guns : MonoBehaviour
 {
-    public float damage = 125;
+    public float damage = 2;
     public float shotDelay; 
     public float reloadTime;
     public float range;
@@ -15,7 +15,8 @@ public class Guns : MonoBehaviour
     bool shooting;
     bool canShoot = true;
     bool reloading;
-
+    [SerializeField]
+    PlayerModel playerModel;
     public Camera cam;
     public Transform shotDirection;
     [SerializeField] Animator animation;
@@ -49,7 +50,7 @@ public class Guns : MonoBehaviour
         ammo = 5;
         shotDelay = 1.5f;
         reloadTime = 2.2f;
-        damage = 125;
+        damage = 2;
     }
     
     public void selMRAD()
@@ -77,56 +78,68 @@ public class Guns : MonoBehaviour
         {
             Reload();
         }
-        if (ammo==0 && !shooting)
-        {
-            Reload();
-        }
     }
     void Shoot()
     {
         RaycastHit hit;
         canShoot = false;
+        bool shotHit = false;
         animation.SetTrigger("Shot");
-        Debug.Log("Shooting");
         ammo--;
        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
         {
             string name = hit.transform.name;
-            Debug.Log(name);
-            if(hit.collider.CompareTag("Enemy"))
+            if(hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Bearattack"))
             {
-                Debug.Log("Here");
-                hit.collider.GetComponent<DamageHandler>().Damage(damage);
-                float health = hit.collider.GetComponent<DamageHandler>().getHealth();
-                hit.collider.GetComponent<test>().hit();
+                GameObject Attacker;
+                if (hit.collider.CompareTag("Bearattack"))
+                {
+                    Attacker = hit.collider.transform.parent.gameObject;
+                    //hit.collider.GetComponentInParent<DamageHandler>().Damage(damage);
+                }
+                else
+                {
+                    Attacker = hit.collider.transform.gameObject;
+                    //hit.collider.GetComponent<DamageHandler>().Damage(damage);
+                }
+                Attacker.GetComponent<DamageHandler>().Damage(damage);
+                float health = Attacker.GetComponent<DamageHandler>().getHealth();
                 if (health <= 0)
                 {
-                    hit.collider.GetComponent<test>().die();
+                    Attacker.GetComponent<Bear>().die();
                 }
+                shotHit = true;
+                Attacker.GetComponent<Bear>().hit();
             }
         }
-        Invoke("ResetShot", shotDelay);
+       playerModel.updateShots(shotHit);
+        //Invoke("ResetShot", shotDelay);
     }
 
-    private void ResetShot()
+    public void ResetShot()
     {
         canShoot=true;
     }
 
-    private void Reload()
+    public void Reload()
     {
         canShoot = false;
         reloading = true;
         animation.SetTrigger("Reload");
-        resetReload();
+        //resetReload();
     }
 
-    private void resetReload()
+    public void resetReload()
     {
         ammo= magazineSize;
         reloading = false;
         canShoot= true;
-        animation.SetTrigger("Reload");
+        //animation.SetTrigger("Reload");
+    }
+
+    public int ammoCount()
+    {
+        return ammo;
     }
 
     // Update is called once per frame

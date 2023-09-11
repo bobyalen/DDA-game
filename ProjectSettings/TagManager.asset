@@ -8,6 +8,7 @@ TagManager:
   - CinemachineTarget
   - Enemy
   - Bearattack
+  - Health
   layers:
   - Default
   - TransparentFX
