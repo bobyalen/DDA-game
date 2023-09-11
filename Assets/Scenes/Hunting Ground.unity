@@ -1964,8 +1964,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834c102c14ddbf642acd5b186374b6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  predator: {fileID: 0}
+  player: {fileID: 1037954945}
+  predator: {fileID: 205366749}
 --- !u!1001 &1039449050
 PrefabInstance:
   m_ObjectHideFlags: 0

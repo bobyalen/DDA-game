@@ -108,7 +108,7 @@ public class playerController : MonoBehaviour
         if (health + amount <= maxHealth)
         {
             health += amount;
-
+            GetComponent<PlayerModel>().playerHealed(amount);
         }
         else health = maxHealth;
     }

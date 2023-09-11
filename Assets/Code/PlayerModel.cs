@@ -47,10 +47,9 @@ public class PlayerModel : MonoBehaviour
         hitCounter++;
     }
 
-    void updatMaxHits()
+    public void updatMaxHits()
     {
-        dmg = Mathf.RoundToInt(predator.getavgDMG()/predator.enemyNum);
-
+        maxHits = (int)player.health/predator.getavgDMG();
     }
 
     public void playerHealed(int amount)
@@ -72,15 +71,6 @@ public class PlayerModel : MonoBehaviour
     public int hitCount()
     {
         return hitCounter;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        hitTimer += Time.deltaTime;
-        if (hitTimer >= resetTimer)
-        {
-            hitTimer= 0;
-            hitCounter= 0;        }
     }
 
     //called everytime player shoots
@@ -123,7 +113,7 @@ public class PlayerModel : MonoBehaviour
             return 100f;
         else if (hitCounter >= maxHits)
             return 0f;
-        float avghitscore = Mathf.Clamp01(1f - ((float)hitTimer / (float)hitCounter));
+        float avghitscore = Mathf.Clamp01(1f - ((float)hitCounter / (float)maxHits));
         return avghitscore*100f;
     }
     #endregion
