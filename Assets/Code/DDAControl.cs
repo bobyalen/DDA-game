@@ -90,8 +90,8 @@ public class DDAControl : MonoBehaviour
     public difficulty GetDifficulty()
     {
        PlayerPrefs.SetString("Difficulty", currentDifficulty.ToString());
-        PlayerPrefs.Save();
-        return currentDifficulty;
+       PlayerPrefs.Save();
+       return currentDifficulty;
     }
    
     public int GetHP()
@@ -186,7 +186,9 @@ public class DDAControl : MonoBehaviour
 
     difficultyStats enemyDiff()
     {
-        switch(currentDifficulty)
+        PlayerPrefs.SetString("Difficulty", currentDifficulty.ToString());
+        PlayerPrefs.Save();
+        switch (currentDifficulty)
         {
             case difficulty.Beginner:
                 return BeginnerStats; 
