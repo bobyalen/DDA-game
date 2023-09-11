@@ -153,7 +153,6 @@ public class DDAControl : MonoBehaviour
         if (wave > 1)
         {
             float playerScore = calculateScore();
-            Debug.Log("Performance Score: " + playerScore);
             if (playerScore <= 0.25f)
             {
                 DecreaseDiff();

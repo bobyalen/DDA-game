@@ -94,6 +94,7 @@ public class PlayerModel : MonoBehaviour
     {
         shots= 0;
         shotsHit= 0;
+        hitCounter= 0;
     }
 
 
