@@ -141,7 +141,7 @@ public class DDAControl : MonoBehaviour
     {
         //time to kill
         float worstTTK = 15.0f;
-        float bestTTK = 8.0f;
+        float bestTTK = 5.0f;
         float TTK = timeSurvived / (float)player.killCounter();
         TTK = Mathf.Clamp(TTK, bestTTK, worstTTK);
         return (1.0f-(TTK-bestTTK)/(worstTTK/bestTTK))*100f;

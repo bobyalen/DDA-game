@@ -12,7 +12,7 @@ public class PredatorController : MonoBehaviour
     [SerializeField]
     DDAControl DDA;
     public Transform bearSpawn;
-
+    float timer = 0f;
     public List<Enemy> enemies= new List<Enemy>();
     public List<Enemy> SpawnObjects = new List<Enemy>();
     List<GameObject> Tospawn = new List<GameObject>();
@@ -28,6 +28,7 @@ public class PredatorController : MonoBehaviour
         //EnemyCost();
         Reset();
         maxEnemies = 12;
+        timer= 14;
     }
 
     public void Reset()
@@ -42,31 +43,34 @@ public class PredatorController : MonoBehaviour
     }
     void Update()
     {
-        if (enemyNum <=0)
+        if (timer <= 15)
         {
+            timer += Time.deltaTime;
+        }
+        else
+        {
+
             DDA.setDiff(wave);
             avgDMG = 0;
             EnemyWaves();
             playerStats.resetAccuracy();
-        }
-        if (Tospawn.Count > 0)
-        {
-            Vector3 newSpawn = new Vector3(bearSpawn.position.x + Random.Range(-20, 30), bearSpawn.position.y, bearSpawn.position.z + Random.Range(-20, 30));
-            while (Vector3.Distance(bearSpawn.position,newSpawn) <=15)
+            while (Tospawn.Count > 0)
             {
-                newSpawn = new Vector3(bearSpawn.position.x + Random.Range(-20, 30), bearSpawn.position.y, bearSpawn.position.z + Random.Range(-20, 30));
-            }
-            //Instantiate(Tospawn[0], newSpawn, Quaternion.identity);
-            //DDA.setDiff();
-            Instantiate(SpawnObjects[0].enemyBase.predators, newSpawn, Quaternion.identity);
+                Vector3 newSpawn = new Vector3(bearSpawn.position.x + Random.Range(-20, 30), bearSpawn.position.y, bearSpawn.position.z + Random.Range(-20, 30));
+                while (Vector3.Distance(bearSpawn.position, newSpawn) <= 15)
+                {
+                    newSpawn = new Vector3(bearSpawn.position.x + Random.Range(-20, 30), bearSpawn.position.y, bearSpawn.position.z + Random.Range(-20, 30));
+                }
+                //Instantiate(Tospawn[0], newSpawn, Quaternion.identity);
+                //DDA.setDiff();
+                Instantiate(SpawnObjects[0].enemyBase.predators, newSpawn, Quaternion.identity);
 
-            setStats(SpawnObjects[0]);
-            //setSpeed(SpawnObjects[0]);
-            Tospawn.RemoveAt(0);
-            if (Tospawn.Count == 0)
-            {
-                playerStats.updatMaxHits();
+                setStats(SpawnObjects[0]);
+                //setSpeed(SpawnObjects[0]);
+                Tospawn.RemoveAt(0);
             }
+            timer= 0;
+            playerStats.updatMaxHits();
         }
     }
 
@@ -82,7 +86,7 @@ public class PredatorController : MonoBehaviour
             SpawnObjects.Add(newspawn);
         }
         wave++;
-        enemyNum = SpawnObjects.Count;
+        enemyNum += SpawnObjects.Count;
     }
 
     [System.Serializable]
