@@ -20,7 +20,6 @@ public class Bear : MonoBehaviour
     [SerializeField] float agroRange, attackRange;
     bool chaseRange, attacking, attackReset;
     bool dead;
-    bool played;
     public float dmg;
 
 
