@@ -134,6 +134,7 @@ public class DDAControl : MonoBehaviour
     float calculateScore()
     {
         float avgScore = ((float)killTime()*0.45f) + ((float)player.CalculateAccuracy()*0.2f) + ((float)player.avgHits()*0.35f);
+        Debug.Log(avgScore);
         return avgScore;
     }
 
@@ -153,11 +154,11 @@ public class DDAControl : MonoBehaviour
         if (wave > 1)
         {
             float playerScore = calculateScore();
-            if (playerScore <= 0.25f)
+            if (playerScore <= 25f)
             {
                 DecreaseDiff();
             }
-            if (playerScore >= 0.8f)
+            if (playerScore >= 75f)
             {
                 IncreaseDiff();
             }

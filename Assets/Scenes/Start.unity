@@ -218,6 +218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 9186281993745436667, guid: be7a28e333a21d64bb59f8d4ddb839cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be7a28e333a21d64bb59f8d4ddb839cc, type: 3}
 --- !u!224 &390307273 stripped
