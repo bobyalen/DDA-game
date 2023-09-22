@@ -29,7 +29,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2370477468296380821}
   - {fileID: 2370477469437732066}
@@ -49,7 +49,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2370477467738426219}
-  m_CullTransparentMesh: 0
+  m_CullTransparentMesh: 1
 --- !u!114 &2370477467738426220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,6 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591ac223946935949a38a68e327f0a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  final: {fileID: 0}
+  time: {fileID: 0}
 --- !u!1 &2370477468203294304
 GameObject:
   m_ObjectHideFlags: 0

@@ -130,17 +130,22 @@ public class DDAControl : MonoBehaviour
         }
         return (int)Random.Range(currentStats.damage.x, currentStats.damage.y);
     }
+    public int GetAggro()
+    {
+        return (int)Random.Range(currentStats.aggroRange.x, currentStats.aggroRange.y);
+    }
 
-    float calculateScore()
+        float calculateScore()
     {
         float avgScore = ((float)killTime()*0.45f) + ((float)player.CalculateAccuracy()*0.2f) + ((float)player.avgHits()*0.35f);
+        Debug.Log(avgScore);
         return avgScore;
     }
 
     float killTime()
     {
         //time to kill
-        float worstTTK = 15.0f;
+        float worstTTK = 11f;
         float bestTTK = 5.0f;
         float TTK = timeSurvived / (float)player.killCounter();
         TTK = Mathf.Clamp(TTK, bestTTK, worstTTK);
@@ -153,11 +158,11 @@ public class DDAControl : MonoBehaviour
         if (wave > 1)
         {
             float playerScore = calculateScore();
-            if (playerScore <= 0.25f)
+            if (playerScore <= 25f)
             {
                 DecreaseDiff();
             }
-            if (playerScore >= 0.8f)
+            if (playerScore >= 75f)
             {
                 IncreaseDiff();
             }

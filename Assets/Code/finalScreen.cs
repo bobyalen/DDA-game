@@ -14,6 +14,8 @@ public class finalScreen : MonoBehaviour
     public TMP_Text time;
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
         int score = PlayerPrefs.GetInt("Score"); ;
         int finalTime = PlayerPrefs.GetInt("Time");
         final.text = "Game Over final Score: " + score.ToString();

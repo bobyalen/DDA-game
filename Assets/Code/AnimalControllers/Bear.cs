@@ -20,7 +20,6 @@ public class Bear : MonoBehaviour
     [SerializeField] float agroRange, attackRange;
     bool chaseRange, attacking, attackReset;
     bool dead;
-    bool played;
     public float dmg;
 
 
@@ -30,7 +29,6 @@ public class Bear : MonoBehaviour
         animate= GetComponent<Animator>();
         player = GameObject.Find("Player");
         dead = false;
-        played= false;
     }
 
     // Update is called once per frame
