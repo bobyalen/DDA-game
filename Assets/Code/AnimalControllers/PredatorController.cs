@@ -104,6 +104,8 @@ public class PredatorController : MonoBehaviour
         enemy.enemyBase.predators.GetComponent<Bear>().setSpeed(enemy.enemyBase.speed);
         enemy.enemyBase.baseAttack= DDA.GetDmg(enemy.enemyBase.baseHP);
         enemy.enemyBase.predators.GetComponent<Bear>().setDMG(enemy.enemyBase.baseAttack);
+        enemy.enemyBase.baseRange= DDA.GetAggro();
+        enemy.enemyBase.predators.GetComponent<Bear>().setAgro(enemy.enemyBase.baseRange);
         avgDMG += enemy.enemyBase.baseAttack;
     }
     public int getavgDMG()
